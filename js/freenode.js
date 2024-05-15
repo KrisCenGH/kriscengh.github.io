@@ -3,9 +3,8 @@ fetch('https://api.github.com/repos/tolinkshare/freenode/contents/README.md')
     .then(data => {
         const markdownContent = atob(data.content); // 解码Base64编码的Markdown内容
         const extractedText = extractTextBetweenThirdAndFourthBackticks(markdownContent);
-        const base64EncodedContent = btoa(extractedText); // 对 Markdown 内容进行 Base64 编码
-        const a = atob(base64EncodedContent);
-        document.getElementById('content').innerText = a; // 输出文本内容
+        const encodedElement = encodeWithLineBreaks(extractedText); // 逐行进行base64编码
+        document.getElementById('content').innerText = encodedElement; // 输出文本内容
     })
     .catch(error => console.error('Error fetching README.md:', error));
 
@@ -20,4 +19,23 @@ fetch('https://api.github.com/repos/tolinkshare/freenode/contents/README.md')
         } else {
             return "No match found";
         }
+    }
+
+    function encodeWithLineBreaks(str) {
+        let result = '';
+        let buffer = '';
+
+        for (let i = 0; i < str.length; ++i) {
+            if (str[i] === '\n') {
+                const base64 = btoa(buffer);
+                result += buffer + '\n';
+                buffer = '';
+            } else {
+                buffer += str[i];
+            }
+        }
+        const base64 = btoa(buffer);
+        result += buffer;
+
+        return result;
     }
