@@ -3,8 +3,7 @@ fetch('https://api.github.com/repos/tolinkshare/freenode/contents/README.md')
     .then(data => {
         const markdownContent = atob(data.content); // 解码Base64编码的Markdown内容
         const extractedText = extractTextBetweenThirdAndFourthBackticks(markdownContent);
-        
-        document.getElementById('content').innerText = btoa(extractedText); // 输出文本内容
+        document.getElementById('content').innerText = extractedText; // 输出文本内容
     })
     .catch(error => console.error('Error fetching README.md:', error));
 
@@ -15,7 +14,8 @@ fetch('https://api.github.com/repos/tolinkshare/freenode/contents/README.md')
     
         // 如果匹配成功，则返回第三个和第四个反引号之间的字符串
         if (match && match.length > 1) {
-            return match[1];
+            const text = match[1].replace(/^\s*[\r\n]/gm, '');
+            return text;
         } else {
             return "No match found";
         }
