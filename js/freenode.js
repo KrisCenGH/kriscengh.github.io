@@ -28,14 +28,14 @@ fetch('https://api.github.com/repos/tolinkshare/freenode/contents/README.md')
         for (let i = 0; i < str.length; ++i) {
             if (str[i] === '\n') {
                 const base64 = btoa(buffer);
-                result += buffer + '\n';
+                result += base64 + '\n';
                 buffer = '';
             } else {
                 buffer += str[i];
             }
         }
         const base64 = btoa(buffer);
-        result += buffer;
+        result += base64;
 
         return result;
     }
