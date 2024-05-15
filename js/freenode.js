@@ -22,7 +22,8 @@ fetch('https://api.github.com/repos/tolinkshare/freenode/contents/README.md')
     }
 
     function removeFirstNewLine(str) {
-        let res = '';
-        res = str.substring(1);
-        return res;
+        if (str[0] === '\n') {
+            return str.substring(1);
+        }
+        return str;
     }
