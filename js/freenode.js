@@ -3,7 +3,8 @@ fetch('https://api.github.com/repos/tolinkshare/freenode/contents/README.md')
     .then(data => {
         const markdownContent = atob(data.content); // 解码Base64编码的Markdown内容
         const extractedText = extractTextBetweenThirdAndFourthBackticks(markdownContent);
-        document.getElementById('content').innerText = btoa(extractedText); // 输出文本内容
+        const encodedText = btoa(extractedText);
+        document.getElementById('content').innerText = encodedText; // 输出文本内容
     })
     .catch(error => console.error('Error fetching README.md:', error));
 
