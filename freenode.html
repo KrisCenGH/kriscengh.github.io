@@ -35,7 +35,8 @@
                 if (data && data.content) {
                     const markdownContent = atob(data.content); // 解码Base64
                     const extractedText = extractTextBetweenThirdAndFourthBackticks(markdownContent); // 正则匹配节点信息
-                    return extractedText;
+                    const encodedText = btoa(extractedText);
+                    return encodedText;
                 } else {
                     throw new Error('No content found in the response');
                 }
