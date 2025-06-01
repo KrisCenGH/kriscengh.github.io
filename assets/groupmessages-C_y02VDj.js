@@ -1,0 +1,1 @@
+import{D as a}from"./index-BN88ZBUW.js";const g=a("groupMessages",{state:()=>({messagesMap:{}}),actions:{addMessage(s,e){this.messagesMap[s]||(this.messagesMap[s]=[]),this.messagesMap[s].push(e),console.log(this.messagesMap)},deleteMessage(s){delete this.messagesMap[s]},getMessagesByGroup(s){return this.messagesMap[s]||[]}}});export{g as u};
